@@ -1,0 +1,44 @@
+/* Navbar container */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Location and language section */
+.navbar .lang {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+/* Remove scrollbar for horizontal lists */
+.sub-list {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.sub-list::-webkit-scrollbar {
+  display: none;
+}
+
+/* Cast text size */
+.all-cast {
+  font-size: 14px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 767px) {
+  .location-search {
+    display: none;
+  }
+  .locations {
+    display: none;
+  }
+}
+
+@media (max-width: 1024px) {
+  .main-search {
+    display: none;
+  }
+}
