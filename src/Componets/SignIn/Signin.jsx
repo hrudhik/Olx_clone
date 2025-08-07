@@ -34,7 +34,7 @@ const Signin = () => {
 
     try {
       if (isSignup) {
-        // Signup validation
+        
         if (formData.password !== formData.confirmPassword) {
           setError('Passwords do not match');
           setLoading(false);
@@ -46,10 +46,10 @@ const Signin = () => {
           return;
         }
         
-        // Create the user
+        
         const userCredential = await createUserWithEmailAndPassword(auth, formData.email, formData.password);
         
-        // Set the display name for the newly created user
+       
         await updateProfile(userCredential.user, {
           displayName: formData.name
         });
@@ -100,7 +100,7 @@ const Signin = () => {
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        {/* OLX Logo placeholder */}
+        
         <div className="flex justify-center">
           <div className="text-4xl font-bold text-gray-800">
             <span style={{ color: '#002f34' }}>OLX</span>
@@ -117,7 +117,7 @@ const Signin = () => {
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <div className="bg-white py-8 px-4 shadow-lg sm:rounded-lg sm:px-10">
           <form className="space-y-6" onSubmit={handleSubmit}>
-            {/* Name field (only for signup) */}
+           
             {isSignup && (
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-gray-700">
@@ -139,7 +139,7 @@ const Signin = () => {
               </div>
             )}
 
-            {/* Email field */}
+           
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-700">
                 Email address
@@ -159,7 +159,7 @@ const Signin = () => {
               </div>
             </div>
 
-            {/* Password field */}
+            
             <div>
               <label htmlFor="password" className="block text-sm font-medium text-gray-700">
                 Password
@@ -179,7 +179,7 @@ const Signin = () => {
               </div>
             </div>
 
-            {/* Confirm Password field (only for signup) */}
+            
             {isSignup && (
               <div>
                 <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700">
@@ -201,14 +201,14 @@ const Signin = () => {
               </div>
             )}
 
-            {/* Error message */}
+            
             {error && (
               <div className="rounded-md bg-red-50 p-3">
                 <div className="text-sm text-red-700">{error}</div>
               </div>
             )}
 
-            {/* Submit button */}
+            
             <div>
               <button
                 type="submit"
@@ -230,7 +230,7 @@ const Signin = () => {
               </button>
             </div>
 
-            {/* Toggle between signin/signup */}
+            
             <div className="text-center">
               <p className="text-sm text-gray-600">
                 {isSignup ? 'Already have an account?' : "Don't have an account?"}{' '}
@@ -244,7 +244,7 @@ const Signin = () => {
               </p>
             </div>
 
-            {/* Back to home */}
+           
             <div className="text-center pt-4">
               <button
                 type="button"
@@ -255,7 +255,7 @@ const Signin = () => {
               </button>
             </div>
 
-            {/* Terms and conditions (for signup) */}
+            
             {isSignup && (
               <div className="text-center">
                 <p className="text-xs text-gray-500">
