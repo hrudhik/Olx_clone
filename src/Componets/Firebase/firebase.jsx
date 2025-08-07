@@ -1,46 +1,95 @@
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getAuth, GoogleAuthProvider } from "firebase/auth";
-import { getStorage } from "firebase/storage";
-import { collection, getDocs, getFirestore } from "firebase/firestore";
+// // Import the functions you need from the SDKs you need
+// import { initializeApp } from "firebase/app";
+// import { getAuth, GoogleAuthProvider } from "firebase/auth";
+// import { getStorage } from "firebase/storage";
+// import { collection, getDocs, getFirestore } from "firebase/firestore";
 
-// Your web app's Firebase configuration
+// // Your web app's Firebase configuration
+// const firebaseConfig = {
+//   apiKey: "AIzaSyDshoY5BSNVpQAwO8Nn-zZoKPWjmUEWFVs",
+//   authDomain: "olx-clone-27824.firebaseapp.com",
+//   projectId: "olx-clone-27824",
+//   storageBucket: "olx-clone-27824.appspot.com",
+//   messagingSenderId: "74560838712",
+//   appId: "1:74560838712:web:848ea1f4d297e688d2dacd"
+// };
+
+// // Initialize Firebase
+// const app = initializeApp(firebaseConfig);
+// const auth = getAuth(app);
+// const provider = new GoogleAuthProvider();
+// export const storage = getStorage(app);   // ✅ storage exported only once
+// const firestore = getFirestore(app);
+
+// // Fetch products
+// const fetchfromFirestore = async () => {
+//   try {
+//     const productCollection = collection(firestore, "products");
+//     const productSnapshot = await getDocs(productCollection);
+//     const productList = productSnapshot.docs.map((doc) => ({
+//       id: doc.id,
+//       ...doc.data(),
+//     }));
+//     console.log("fetch data from firestore", productList);
+//     return productList;
+//   } catch (error) {
+//     console.log("error fetching products from firestore", error);
+//     return [];
+//   }
+// };
+
+// export {
+//   auth,
+//   provider,
+//   firestore,
+//   fetchfromFirestore
+// };
+
+
+
+import { initializeApp } from "firebase/app";
+import {getAuth, GoogleAuthProvider } from "firebase/auth"; 
+import {getStorage} from 'firebase/storage'
+import { collection, getDocs, getFirestore } from "firebase/firestore"; 
+
+
 const firebaseConfig = {
   apiKey: "AIzaSyDshoY5BSNVpQAwO8Nn-zZoKPWjmUEWFVs",
   authDomain: "olx-clone-27824.firebaseapp.com",
   projectId: "olx-clone-27824",
-  storageBucket: "olx-clone-27824.appspot.com",
+  storageBucket: "olx-clone-27824.firebasestorage.app",
   messagingSenderId: "74560838712",
   appId: "1:74560838712:web:848ea1f4d297e688d2dacd"
-};
+};  
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
-export const storage = getStorage(app);   // ✅ storage exported only once
-const firestore = getFirestore(app);
+const storage = getStorage(app);
+const fireStore = getFirestore(app);
 
-// Fetch products
-const fetchfromFirestore = async () => {
-  try {
-    const productCollection = collection(firestore, "products");
-    const productSnapshot = await getDocs(productCollection);
-    const productList = productSnapshot.docs.map((doc) => ({
-      id: doc.id,
-      ...doc.data(),
-    }));
-    console.log("fetch data from firestore", productList);
-    return productList;
-  } catch (error) {
-    console.log("error fetching products from firestore", error);
-    return [];
+
+const fetchFromFirestore = async () => {
+    try {
+      const productsCollection = collection(fireStore, 'products');
+      const productSnapshot = await getDocs(productsCollection);
+      const productList = productSnapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data(),
+      })) 
+      console.log("Fetched products from Firestore:", productList);
+      return productList;
+    } catch (error) {
+      console.error("Error fetching products from Firestore:", error);
+      return [];
+    }
+  };
+  
+
+  export {
+    auth,
+    provider,
+    storage,
+    fireStore,
+    fetchFromFirestore
   }
-};
-
-export {
-  auth,
-  provider,
-  firestore,
-  fetchfromFirestore
-};
