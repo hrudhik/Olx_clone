@@ -35,6 +35,12 @@ const Card = ({ items }) => {
             style={{ borderWidth: "1px", borderColor: "lightgray" }}
             className="relative w-full h-72 rounded-md border-solid bg-gray-50 overflow-hidden cursor-pointer"
           >
+
+          <div className="w-full flex justify-center p-2 overflow-hidden">
+                <img className="h-36 object-contain"
+                src={item.imageurl || 'httpS://via.placeholder.com/150'} alt={item.title} />
+          </div>
+
             <div className="details p-1 pl-4 pr-4">
               <h1 style={{ color: "#002f34" }} className="font-bold text-xl">
                 ₹{item.price}

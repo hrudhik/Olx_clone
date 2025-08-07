@@ -5,38 +5,38 @@ import Sell from "../Modal/Sell"
 import Card from "../Card/Card"
 import { Itemcontext } from "../Context/Item"
 import { fetchfromFirestore } from "../Firebase/firebase"
-const Home=()=>{
+const Home = () => {
+  const [openmodal, setmodal] = useState(false);
+  const [openSellmodal, setSellmodal] = useState(false);
 
-    const [openmodal,setmodal]=useState(false)
-    const [openSellmodal,setSellmodal]=useState(false)
+  const togglemodal = () => setmodal(!openmodal);
+  const toggleSellmodal = () => setSellmodal(!openSellmodal);
 
+  const { items, setItems } = Itemcontext();  // ✅ correct
 
-    const togglemodal=()=>{setmodal(!openmodal)}
-    const toggleSellmodal=()=>{setSellmodal(!openSellmodal)}
+  useEffect(() => {
+    const getItems = async () => {
+      const data = await fetchfromFirestore();
+      setItems(data);   // ✅ lowercase "setitems"
+    };
+    getItems();
+  }, []);
 
-    const contextItem= Itemcontext();
+  useEffect(() => {
+    console.log("Updated Item", items);
+  }, [items]);
 
-    useEffect(()=>{
-        const getItems= async ()=>{
-            const data = await fetchfromFirestore()
-            contextItem?.setItems(data)
-        }
-        getItems();
-    },[])
+  return (
+    <div>
+      <Navbar togglemodal={togglemodal} toggleSellmodal={toggleSellmodal} />
+      <Login togglemodal={togglemodal} status={openmodal} />
+      <Sell setItems={setItems} toggleSellmodal={toggleSellmodal} status={openSellmodal} />
+      <Card items={items || []} />
+    </div>
+  );
+};
 
-    useEffect(()=>{
-        console.log("Updated Item",contextItem.items)
-    },[contextItem.items])
-
-    return (
-        <div>
-            <Navbar togglemodal={togglemodal} toggleSellmodal={toggleSellmodal}/>
-            <Login togglemodal={togglemodal} status={openmodal}/>
-            <Sell setItems={(contextItem).setItems} toggleSellmodal={toggleSellmodal} status={openSellmodal}/>
-
-            <Card items={(contextItem).items||[]}/>
-        </div>
-    )
-}
 
 export default Home
+
+

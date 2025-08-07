@@ -6,7 +6,7 @@ const context=createContext(null)
 export const Itemcontext=()=> useContext(context);
 
 export const ItemcontextPorvider=({children})=>{
-    const [items,setitems]=useState(null);
+    const [items,setItems]=useState(null);
 
     useEffect(()=>{
         const fetchItemsfromFirestore=async ()=>{
@@ -17,7 +17,7 @@ export const ItemcontextPorvider=({children})=>{
                     id:doc.id,
                     ...doc.data()
                 }))
-                setitems(productList)
+                setItems(productList)
             } catch (error) {
                 console.log(error)
                 alert(" faild fetch items for firebase")
@@ -27,7 +27,7 @@ export const ItemcontextPorvider=({children})=>{
     },[])
     return (
         <>
-        <context.Provider value={{items,setitems}}>
+        <context.Provider value={{items,setItems}}>
             {children}
         </context.Provider>
         </>
